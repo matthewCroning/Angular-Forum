@@ -1,0 +1,15 @@
+username
+<input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="username" required #username="ngModel">
+
+email
+<input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email" required #email="ngModel">
+
+password
+<input [(ngModel)]="user.password" name="password" type="text" class="form-control" id="password" required #password="ngModel">
+
+password confirm
+<input [(ngModel)]="user.passwordConfirmation" name="passwordConfirm" type="text" class="form-control" id="passwordConfirm" required #passwordConfirm="ngModel">
+
+<button (click)="register()">Register</button>
+
+

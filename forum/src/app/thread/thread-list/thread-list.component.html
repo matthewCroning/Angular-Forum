@@ -1,0 +1,9 @@
+<!--
+    routerLink="/threads/{{thread._id}}"
+-->
+    thread list component!
+<ng-container *ngFor="let thread of threads">
+    <h1 routerLink="/threads/{{thread._id}}">
+        {{ thread.title }}
+    </h1>
+</ng-container>
