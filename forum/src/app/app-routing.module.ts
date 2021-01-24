@@ -1,3 +1,5 @@
+import { ThreadCreateComponent } from './thread/thread-create/thread-create.component';
+import { CreatePostComponent } from './post/create-post/create-post.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { NgModule } from '@angular/core';
@@ -9,12 +11,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '',
-    redirectTo: '/threads',
+    redirectTo: '/threads/threadlist',
     pathMatch: 'full',
   },
   { 
     path: 'threads', 
-    loadChildren: () => import('./thread/thread.module').then(mod => mod.ThreadModule),
+    loadChildren: () => import('./thread/thread.module').then(mod => mod.ThreadModule)
   },
   {
     path: 'register',
@@ -25,6 +27,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'create',
+    component: LoginComponent
   }
 ];
 

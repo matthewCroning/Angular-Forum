@@ -2,14 +2,18 @@ const config = require("../config/dev");
 const Thread = require("../models/thread");
 const User = require("../models/user");
 const {normalizeErrors} = require("../helpers/mongoose-helper");
+const thread = require("../models/thread");
 
 exports.create = function(req, res, next){
     const user = res.locals.user;
     const title = req.body.title;
-
+    console.log(user);
+    console.log("title: " + title);
     const createdThread = new Thread({title: title, user: user});
     createdThread.save();
-    return res.json("Thread Created!");
+    user.threads.push(createdThread);
+    user.save();
+    return res.json(createdThread.id);
 }
 
 exports.find = function(req, res, next){
@@ -20,14 +24,34 @@ exports.find = function(req, res, next){
 }
 
 exports.findAll = function(req, res, next){
-    Thread.find({}).exec(function(err, AllThreads){
+    var page = Number(req.params.page);
+    const view = Number(req.params.view);
+    page = page-1;
+    const pagesSkip = view * page;
+    console.log("page: " + page);
+    console.log("view: " + view);
+    console.log(pagesSkip);
+    Thread.find({}, null, {skip: pagesSkip, limit: view}).exec(function(err, AllThreads){
         return res.json(AllThreads);
     })
 }
 
+    
+
+
 exports.findById = function(req, res, next){
-    const threadId = req.body.id;
-    Thread.findById(threadId).exec(function(err, foundThread) {
-        return res.json(foundThread);
-    })
+    const threadId = req.params.id;
+  
+
+    // Thread.findById(threadId).populate({path: 'user'}).populate({path: 'posts',  populate: {path: 'user'} }).exec(function(err, foundThread) {
+    //     return res.json(foundThread);
+    // })
+     Thread.find({_id: threadId}).exec(function(err, foundThread) {
+         return res.json(foundThread);
+     })
+    // Thread.findById(threadId).populate().exec(function(err, foundThread) {
+    //     return res.json(foundThread);
+    // })
 }
+
+  

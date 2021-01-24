@@ -23,10 +23,11 @@ export class LoginComponent implements OnInit {
               private AuthService: AuthService) {}
 
   ngOnInit() {
-
+    this.loginData.email = this.route.snapshot.paramMap.get('email')
   }
 
   login(data) {
+    console.log(this.loginData);
     this.AuthService.login(this.loginData).subscribe((data) => {
       this.router.navigate(['/']);
     }, (invalidResponse: any) => {

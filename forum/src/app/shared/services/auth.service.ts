@@ -64,6 +64,7 @@ export class AuthService {
   }
 
   public logout(): Observable<any> {
+    console.log("logging out");
     localStorage.removeItem('auth');
     this.token = '';
     this.username = '';
@@ -90,3 +91,4 @@ export class AuthService {
   }
 
 }
+  

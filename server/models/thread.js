@@ -8,4 +8,16 @@ const threadShema = new Schema({
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
 
+threadShema.pre('find', autoPopulateSubs);
+
+function autoPopulateSubs(next) {
+  this.populate({path: 'posts',  populate: {path: 'replys'} });
+  this.populate('user');
+  next();
+}
+
+function fart(){
+  console.log("fart");
+}
+
 module.exports = mongoose.model("Thread", threadShema);

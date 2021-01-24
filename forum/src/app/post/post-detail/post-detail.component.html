@@ -1,0 +1,18 @@
+
+<h5>
+<ng-container *ngFor="let item of createRange(replyNumber)">
+&nbsp;&nbsp;&nbsp;&nbsp;
+</ng-container>
+{{post.user.username}} - {{ post.createdAt }} 
+<p>
+    <ng-container *ngFor="let item of createRange(replyNumber)">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    </ng-container>
+    {{ post.content }}
+</p>
+</h5>
+
+
+<ng-container *ngFor="let reply of post.replys" >
+    <app-post-detail [post]=reply [replyNumber]=replyNumber+1></app-post-detail>
+</ng-container>

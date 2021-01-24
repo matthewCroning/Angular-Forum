@@ -1,3 +1,5 @@
+import { PostDetailComponent } from './../post/post-detail/post-detail.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ThreadService } from './../shared/services/thread.service';
 import { ThreadListComponent } from './thread-list/thread-list.component';
 import { NgModule } from '@angular/core';
@@ -7,6 +9,10 @@ import { ThreadRoutingModule } from './thread-routing.module';
 import { ThreadComponent } from './thread.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ThreadDetailComponent } from './thread-detail/thread-detail.component';
+import { CreatePostComponent } from '../post/create-post/create-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThreadCreateComponent } from './thread-create/thread-create.component';
+import { TokenInterceptor } from '../shared/interceptor/token.interceptor';
 
 
 
@@ -14,14 +20,24 @@ import { ThreadDetailComponent } from './thread-detail/thread-detail.component';
   declarations: [
     ThreadComponent,
     ThreadListComponent,
-    ThreadDetailComponent
+    ThreadDetailComponent,
+    CreatePostComponent,
+    ThreadCreateComponent,
+    PostDetailComponent
   ],
   imports: [
     CommonModule,
     ThreadRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
    providers: [
-    ThreadService
+    ThreadService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ]
 })
 export class ThreadModule { }

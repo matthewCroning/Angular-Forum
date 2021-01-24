@@ -10,13 +10,16 @@ import { ThreadService } from './../../shared/services/thread.service';
 })
 export class ThreadDetailComponent implements OnInit {
 
-  thread: Thread;
-  
+  thread;
+  loaded = false;
   constructor(private ThreadService:ThreadService, public route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      ThreadService.getThread(params['id']).subscribe((thread: Thread) => {
+      ThreadService.getThread(params['id']).subscribe((thread) => {
+        console.log("thread = ");
         console.log(thread);
-        this.thread = thread;
+        console.log(thread[0].user);
+        this.thread = thread[0];
+        this.loaded = true;
       });;
     });
    }

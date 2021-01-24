@@ -2,19 +2,25 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Angular Forum</a>
-  
+    <a class="navbar-brand" href="#">welcome Angular Forum</a>
+    
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
           <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!authService.isAuthenticated()" class="nav-item">
           <a class="nav-link" routerLink="/register">Register</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!authService.isAuthenticated()" class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>
         </li>
+        <li *ngIf="authService.isAuthenticated()" class="nav-item">
+          <button class="nav-link" (click)="logout()">Logout</button>
+      </li>
+     
       </ul>
     </div>
+ 
   </nav>
+ 

@@ -1,4 +1,5 @@
 import { Thread } from './thread.model';
+import { User } from './user.model';
 
 export class Post{
     _id: string;
@@ -6,5 +7,6 @@ export class Post{
     content: string;
     createdAt: string;
     thread: Thread;
+    user: User;
 }
   

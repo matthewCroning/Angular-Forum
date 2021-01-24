@@ -1,9 +1,18 @@
 <!--
     routerLink="/threads/{{thread._id}}"
 -->
-    thread list component!
+<a *ngIf="authService.isAuthenticated()" routerLink="/threads/create">create a Thread</a>
+
+<button (click)="setViewNumber(10)">10</button>
+<button (click)="setViewNumber(15)">15</button>
+<button (click)="setViewNumber(20)">20</button>
+<button (click)="setViewNumber(30)">30</button>
+
 <ng-container *ngFor="let thread of threads">
     <h1 routerLink="/threads/{{thread._id}}">
-        {{ thread.title }}
+        {{ thread.title }} / 
+      
     </h1>
 </ng-container>
+<button (click)="prevPage()">prev </button>
+<button (click)="nextPage()">next </button>

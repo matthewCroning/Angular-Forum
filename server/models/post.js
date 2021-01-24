@@ -1,12 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postShema = new Schema({
-  title: {type: String, required: true},
+const postSchema = new Schema({
   content: {type: String, required: true},
   createdAt: {type: Date, default: Date.now},
   user: {type: Schema.Types.ObjectId, ref: 'User'},
-  thread: {type: Schema.Types.ObjectId, ref: 'Thread'} 
+  thread: {type: Schema.Types.ObjectId, ref: 'Thread'},
+  replys: [{type: Schema.Types.ObjectId, ref: 'Post'}] 
 });
 
-module.exports = mongoose.model("Post", postShema);
+postSchema.pre('find', autoPopulateSubs);
+
+function autoPopulateSubs() {
+  this.populate('replys');
+  this.populate('user');
+}
+
+module.exports = mongoose.model("Post", postSchema);

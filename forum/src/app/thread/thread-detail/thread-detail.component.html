@@ -1,10 +1,12 @@
-<h1> {{thread.title}}</h1>
+<ng-container *ngIf="loaded === true">
+    <h1> {{thread.title}}</h1>
+    <h2> {{ thread.user.username }} </h2>
+</ng-container>
+
+
+
+<app-create-post [thread]=thread></app-create-post>
 
 <ng-container *ngFor="let post of thread.posts">
-    <h2>
-        {{ post.title }} 
-    </h2>
-    <p>
-        {{ post.content }}
-    </p>
+    <app-post-detail [post]=post [replyNumber]=0></app-post-detail>
 </ng-container>

@@ -1,0 +1,5 @@
+<ng-container *ngIf="authService.isAuthenticated()">
+<input [(ngModel)]="post.content" name="post" type="text" class="form-control" id="post" required #content="ngModel">
+{{post.content}}
+<button (click)="create()">create</button>
+</ng-container>

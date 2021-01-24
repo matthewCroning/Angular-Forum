@@ -1,6 +1,7 @@
 import { AuthService } from './../../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   user: User = new User();
   
-  constructor(private AuthService: AuthService) { }
+  constructor(private router: Router, private AuthService: AuthService) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,9 @@ export class RegisterComponent implements OnInit {
     this.AuthService.register(this.user).subscribe(
       (data) => {
         console.log(data);
+        if(data.registered == true){
+          this.router.navigate(['/login', {email: this.user.email}]);
+        }
     })
   }
 
