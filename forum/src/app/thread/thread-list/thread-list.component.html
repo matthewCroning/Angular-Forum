@@ -3,16 +3,23 @@
 -->
 <a *ngIf="authService.isAuthenticated()" routerLink="/threads/create">create a Thread</a>
 
-<button (click)="setViewNumber(10)">10</button>
-<button (click)="setViewNumber(15)">15</button>
-<button (click)="setViewNumber(20)">20</button>
-<button (click)="setViewNumber(30)">30</button>
-
+<p>
+    view threads
+<select class="selectpicker"> 
+    <option (click)="setViewNumber(10)">10</option>
+    <option (click)="setViewNumber(15)">15</option>
+    <option (click)="setViewNumber(20)">20</option>
+    <option (click)="setViewNumber(30)">30</option>
+</select>
+</p>
 <ng-container *ngFor="let thread of threads">
-    <h1 routerLink="/threads/{{thread._id}}">
-        {{ thread.title }} / 
-      
-    </h1>
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <h1 routerLink="/threads/{{thread._id}}">
+                {{ thread.title }}
+            </h1>
+        </div>
+      </div>
 </ng-container>
 <button (click)="prevPage()">prev </button>
 <button (click)="nextPage()">next </button>
