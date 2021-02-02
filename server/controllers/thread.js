@@ -36,6 +36,14 @@ exports.findAll = function(req, res, next){
     })
 }
 
+
+exports.findByTitle = function(req, res, next){
+    var title = req.params.title;
+    
+    Thread.find( {title: {$regex: title, $options: "i"}} ).exec(function(err, FoundThreads){
+        return res.json(FoundThreads);
+    }); 
+}
     
 
 

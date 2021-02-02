@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'threadlist', component: ThreadListComponent, pathMatch: 'full'},
     { path: 'threadlist/:page', component: ThreadListComponent, pathMatch: 'full'},
     { path: 'threadlist/:page/:view', component: ThreadListComponent, pathMatch: 'full'},
+    { path: 'threadlist/:page/:view', component: ThreadListComponent, pathMatch: 'full'},
     { path: 'create', component: ThreadCreateComponent, pathMatch: 'full', canActivate: [AuthGuard]},
     { path: ':id', component: ThreadDetailComponent},
   ]

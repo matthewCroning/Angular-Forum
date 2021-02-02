@@ -13,6 +13,7 @@ import { CreatePostComponent } from '../post/create-post/create-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThreadCreateComponent } from './thread-create/thread-create.component';
 import { TokenInterceptor } from '../shared/interceptor/token.interceptor';
+import { ThreadSearchComponent } from './thread-search/thread-search.component';
 
 
 
@@ -23,7 +24,8 @@ import { TokenInterceptor } from '../shared/interceptor/token.interceptor';
     ThreadDetailComponent,
     CreatePostComponent,
     ThreadCreateComponent,
-    PostDetailComponent
+    PostDetailComponent,
+    ThreadSearchComponent
   ],
   imports: [
     CommonModule,
