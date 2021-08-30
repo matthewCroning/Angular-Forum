@@ -12,7 +12,7 @@ const postSchema = new Schema({
 postSchema.pre('find', autoPopulateSubs);
 
 function autoPopulateSubs() {
-  this.populate('replys');
+  this.populate({path: 'replys', options: { sort: { 'createdAt': -1 } }});
   this.populate('user');
 }
 

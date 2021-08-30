@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const threadShema = new Schema({
   title: {type: String, required: true},
   createdAt: {type: Date, default: Date.now},
+  updatedAt: {type: Date, default: Date.now},
   user: {type: Schema.Types.ObjectId, ref: 'User'}, 
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
@@ -11,7 +12,7 @@ const threadShema = new Schema({
 threadShema.pre('find', autoPopulateSubs);
 
 function autoPopulateSubs(next) {
-  this.populate({path: 'posts',  populate: {path: 'replys'} });
+  this.populate({path: 'posts', options: { sort: { 'createdAt': -1 } },  populate: {path: 'replys'} });
   this.populate('user');
   next();
 }

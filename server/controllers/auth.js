@@ -91,3 +91,7 @@ function parseToken(token) {
 
   return token;
 }
+
+function getUsername(){
+  
+}

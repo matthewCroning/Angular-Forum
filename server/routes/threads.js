@@ -8,6 +8,6 @@ router.post("/find", Thread.find);
 router.get("/findAll/:page/:view", Thread.findAll);
 router.get("/findAll", Thread.findAll);
 router.get("/findById/:id", Thread.findById);
-router.get("/findByTitle", Thread.findByTitle);
+router.get("/findByTitle/:page/:view/:title", Thread.findByTitle);
 
 module.exports = router;

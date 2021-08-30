@@ -31,7 +31,7 @@ exports.findAll = function(req, res, next){
     console.log("page: " + page);
     console.log("view: " + view);
     console.log(pagesSkip);
-    Thread.find({}, null, {skip: pagesSkip, limit: view}).exec(function(err, AllThreads){
+    Thread.find().populate('user').collation({ locale: "en" }).skip(pagesSkip).limit(view).sort([['updatedAt', -1]]).exec(function(err, AllThreads){
         return res.json(AllThreads);
     })
 }
@@ -39,10 +39,14 @@ exports.findAll = function(req, res, next){
 
 exports.findByTitle = function(req, res, next){
     var title = req.params.title;
-    
-    Thread.find( {title: {$regex: title, $options: "i"}} ).exec(function(err, FoundThreads){
+    var page = Number(req.params.page);
+    var pagesSkip = view * page;
+    var view = Number(req.params.view);
+    console.log("findingTitle");
+    Thread.find({title: {$regex: title, $options: "i"}} ).skip(pagesSkip).limit(view).exec(function(err, FoundThreads){
         return res.json(FoundThreads);
     }); 
+
 }
     
 
@@ -54,9 +58,18 @@ exports.findById = function(req, res, next){
     // Thread.findById(threadId).populate({path: 'user'}).populate({path: 'posts',  populate: {path: 'user'} }).exec(function(err, foundThread) {
     //     return res.json(foundThread);
     // })
-     Thread.find({_id: threadId}).exec(function(err, foundThread) {
+
+    Thread.aggregate([
+            { $unwind: "$posts" },
+            { $sort: { "posts.createdAt": -1 } },
+            { $group: { _id: "$_id", details: { $push: "$posts" } } }
+    ]);
+
+    Thread.find({_id: threadId}).exec(function(err, foundThread) {
          return res.json(foundThread);
      })
+
+     
     // Thread.findById(threadId).populate().exec(function(err, foundThread) {
     //     return res.json(foundThread);
     // })
