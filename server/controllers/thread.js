@@ -7,12 +7,14 @@ const thread = require("../models/thread");
 exports.create = function(req, res, next){
     const user = res.locals.user;
     const title = req.body.title;
+    const content = req.body.content;
     console.log(user);
     console.log("title: " + title);
-    const createdThread = new Thread({title: title, user: user});
+    const createdThread = new Thread({title: title, user: user, content: content});
     createdThread.save();
     user.threads.push(createdThread);
     user.save();
+    console.log(user);
     return res.json(createdThread.id);
 }
 

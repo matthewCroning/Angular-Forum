@@ -9,7 +9,8 @@ const express       = require("express"),
 
 const authRoutes    = require("./routes/auth"),
       threadRoutes = require("./routes/threads");
-      postRoutes = require("./routes/posts");  
+      postRoutes = require("./routes/posts"),
+      userRoutes = require("./routes/user");  
 
 const PORT = process.env.PORT || '3001';
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/users", authRoutes);
 app.use("/api/v1/thread", threadRoutes);
 app.use("/api/v1/post", postRoutes);
+app.use("/api/v1/user", userRoutes);
 
 mongoose.connect("mongodb://localhost:27017/forum").then(() => {
     console.log("mongoose logged in");
