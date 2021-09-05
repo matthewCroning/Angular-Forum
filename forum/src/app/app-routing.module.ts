@@ -18,6 +18,11 @@ const routes: Routes = [
     path: 'threads', 
     loadChildren: () => import('./thread/thread.module').then(mod => mod.ThreadModule)
   },
+  { 
+    path: 'users', 
+    loadChildren: () => import('./user/user.module').then(mod => mod.UserModule)
+  },
+  
   {
     path: 'register',
     component: RegisterComponent,
